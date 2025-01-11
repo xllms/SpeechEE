@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Speech Event Extraction.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>XLLM ACL 2025 Shared Task-II: Speech Event Extraction</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <!--  <script src="./static/js/index.js"></script>-->
+    <style>
+        pre {outline: 1px solid #ccc; }
+         .string { color: green; }
+         .number { color: darkorange; }
+         .boolean { color: blue; }
+         .null { color: magenta; }
+         .key { color: red; }
+        ._table{width: 100%; border-collapse: collapse; border:0px;}
+        ._table thead tr {font-size: 13px; color: #2e3b45;  text-align: center; background-color: rgba(230, 255, 250, 0.92); font-weight:bold;}
+        ._table td{line-height: 20px; text-align: center; padding: 4px 10px 3px 10px; height: 18px;border: 0px solid #ffffff;}
+        ._table tbody tr {background: #fff; font-size: 13px; color: #393939;}
+        ._table tbody tr:nth-child(2n){ background: #f3f3f3;}
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">XLLM ACL 2025 Shared Task-II: Speech Event Extraction (SpeechEE)</h1>
+
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <!-- Data Link. -->
+                                <span class="link-block">
+                                    <a href="#introduction"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Introduction</span>
+                                    </a>
+                                </span>
+                                <!-- Data Link. -->
+                                <span class="link-block">
+                                    <a href="#dataset"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Dataset</span>
+                                    </a>
+                                </span>
+                                <!-- Paper Link. -->
+                                <span class="link-block">
+                                    <a href="#task"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Task & Evaluation</span>
+                                    </a>
+                                </span>
+                                <!-- Code Link. -->
+                                <span class="link-block">
+                                    <a href="#submission"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Participate</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a href="#timeline"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Timeline</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a href="https://www.codabench.org/competitions/4897/"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>CodaBench</span>
+                                    </a>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section"style="margin-top: -50px;">
+        <div class="container is-max-desktop">
+
+            <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Leaderboard</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Congratulations to the winners!
+                        </p>
+                        <table class="._table table-bordered table-striped" align="center">
+                            <tbody align="center" valign="center">
+                            <tr>
+                                <td>Rank</td>
+                                <td>Team</td>
+                                <td>Score</td>
+                              </tr>
+                            <tr>
+                              <td>1</td>
+                              <td>Token</td>
+                              <td>63.2064</td>
+                            </tr>
+                            <tr>
+                              <td>2</td>
+                              <td>USTC-IAT-United</td>
+                              <td>62.1149</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>ppjj</td>
+                                <td>59.8638</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>GXU-LIPE</td>
+                                <td>59.6864</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>DMCV</td>
+                                <td>59.3998</td>
+                            </tr>
+                            
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> -->
+            
+            <!-- Abstract. -->
+            <div id="introduction" class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Introduction</h2>
+                    <div class="content has-text-justified">
+
+                        <div style="text-align: center;">
+                            <img src="static/images/overview.png" width="90%" alt="">
+                            <p><b>Overview: SpeechEE Task.</b></p>
+                        </div>
+
+                        <p>
+                        We propose the Speech Event Extraction (SpeechEE) challenge on the XLLM platform. Unlike traditional textual event extraction, SpeechEE aims to detect event triggers and arguments directly from audio speech, even when transcripts are unavailable. The SpeechEE is defined as: Given a speech audio input consisting of a sequence of acoustic frames, the goal is to extract structured event records comprising four elements: 1) the event type, 2) the event trigger, 3) event argument roles, and 4) the corresponding event arguments.
+                        </p>
+
+                        
+                        <p>
+                            The challenge contains three subtasks, from easy to hard.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+            <!-- Paper video. -->
+            <div id="task" div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Challenge Task Definition and Metrtics</h2>
+                    <div class="content has-text-justified">
+                        <div style="text-align: center;">
+                            <img src="static/images/task1.png" width="90%" alt="">
+                            <p><b>Task 1: Event Detection.</b></p>
+                        </div>
+                        <p>
+                            <b>Task-1:</b> Event Detection aims to identify event trigger words and classify them into corresponding event types. Participants are required to develop models that can accurately extract the event triggers. A trigger is considered correctly extracted if both the trigger mention and the event type match the reference. The evaluation metric for this sub-task is the F1 score.
+                        </p>
+                        
+                        <div style="text-align: center;">
+                            <img src="static/images/task2.png" width="90%" alt="">
+                            <p><b>Task 2: Event Argument Exraction.</b></p>
+                        </div>
+                        <p>
+                            <b>Task-2:</b>
+                            Event Argument Exraction aims to the identify the event argument and classify the argument role.
+                            An argument is considered correctly extracted if its event type, argument role, and argument mention all match the reference. The evaluation metric for this sub-task is the F1 score.
+                         <p>
+                        
+                        <div style="text-align: center;">
+                            <img src="static/images/task3.png" width="90%" alt="">
+                            <p><b>Task 3:  Event Quadruple Extraction.</b></p>
+                        </div>
+                        <p>
+                            <b>Task-3:</b> Event Quadruple Extraction aims to extract the complete event record quadruple including event trigger, event type, argument role and argument mention. The evaluation metric for this sub-task is the F1 score.
+                        </p>
+                        
+                        <div class="columns is-centered has-text-centered">
+                            <div>
+                                <h2 class="title is-3">Evaluation</h2>
+                                <div class="content has-text-justified">
+                                    <p>
+                          
+                                        The F1 score is computed using precision (P) and recall (R), which are calculated as follows:
+                                         <p>
+                                          <b><em>P = TP / ( TP + FP )</em></b>
+                                         </p>
+                                         <p>
+                                          <b><em>R = TP / ( TP + FN ) </em></b>
+                                         </p>
+                                         <p>
+                                          <b><em>F1 = 2 * P * R / ( P + R ) </em></b>
+                                         </p>
+                                       
+                                         where TP, FP, and FN represent specific items that are used to calculate the F1 score in the context of a Confusion_matrix.
+                                         In particular, when computing the micro-F1 score, TP corresponds to the number of predicted tuple that match exactly with those in the gold set. 
+                                         
+              
+              
+                                         
+                                      </p>
+                                      <p>
+                                          Finally, we use the following score for ranking:
+                                      </p>
+                                      <p>
+                                               <b>overall score=<em>0.3*Task<sub>1</sub>+0.3*Task<sub>2</sub>+0.4*Task<sub>3</sub></em></b>
+                                      <p>
+                                          We provide python scripts for evaluation, please refer to the <a href="#baseline">baseline codes</a> "/challenge/scoring.py".
+                       
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+             <!-- Datasets. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="dataset" class="column is-four-fifths">
+                    <h2 class="title is-3">Dataset</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                             The dataset for this challenge is derived from ACE2005-EN+. 
+                             It is a benchmark dataset for event extraction in the English language. 
+                             
+                             ACE2005-EN+ extended the original ACE05-EN data by considering multi-token event triggers and pronoun roles. 
+                        </p>
+                        <p>
+                             This dataset contains 33 event types and 22 argument roles, with 12,867 audios for training your model. The detailed information is recorded in the <a href="#baseline">baseline codes</a> "/challenge/event-schema.json".
+                        </p>
+                        <p>
+                            Example of a sample:
+                        </p>
+                        <pre id="jsonShow">{"id": "train-3", "event": [{"trigger": "landed", "type": "Transport", "arguments": [{"name": "boat", "role": "Vehicle"}, {"name": "men", "role": "Artifact"}, {"name": "shores", "role": "Destination"}]}]}
+</pre>
+                        <p>
+                            The datasets (audio) are avaliable on <a href="https://drive.google.com/file/d/1Ot7PN3fTwQ76Ij49UG-_Qt9TMBF_Bjio/view?usp=sharing">Google Drive</a> and the label json files are in the <a href="#baseline">baseline codes</a> "/challenge/data/ACE05EN".
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="columns is-centered has-text-centered">
+                <div id="timeline" class="column is-four-fifths">
+                    <h2 class="title is-3">Timeline</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Please note: The submission deadline is at 11:59 p.m. (<a herf="https://www.timeanddate.com/time/zones/aoe" style="color:red">Anywhere on Earth</a>) of the stated deadline date.
+                        </p>
+                        <table class="._table table-bordered table-striped" align="center">
+                            <tbody align="center" valign="center">
+                            <tr>
+                              <td>Training data and participant instruction release for all shared tasks</td>
+                              <td>February 10, 2025</td>
+                            </tr>
+                            <tr>
+                              <td>Evaluation deadline for all shared tasks</td>
+                              <td>March 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Notification of all shared tasks</td>
+                                <td>April 5, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Shared-task paper submission deadline</td>
+                                <td>April 12, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Acceptance notification of shared-task papers</td>
+                                <td>April 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Camera ready paper deadline</td>
+                                <td>May 16, 2025</td>
+                            </tr>
+                            
+
+
+                            <!-- <tr>
+                                <td><b style="color: red">Challenge Paper Submission Deadline</b>(follow <a href="https://2024.acmmm.org/important-dates">MM2024 Workshop Dates</a>)</td>
+                                <td><b style="color: red">August 19, 2024</b></td>
+                            </tr> -->
+
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="submission" class="column is-four-fifths">
+                    <h2 class="title is-3">Submission</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                             Please sumbit predicted results with a json files "results.json".
+                        </p>
+                        
+                        <pre id="jsonShow">
+[
+{
+    "id": "test-0",
+    "event": [{
+        "trigger": "advance",
+        "type": "Transport",
+        "arguments": [{
+            "name": "elements",
+            "role": "Artifact"
+        }, {
+            "name": "city",
+            "role": "Origin"
+        }, {
+            "name": "Baghdad",
+            "role": "Destination"
+        }]
+    }]
+},
+{
+    "id": "test-1",
+    "event": [{
+       ...
+    }]
+},
+...
+]
+</pre>
+                      
+<!--                         <p>
+                            Link to <a href="#">Codalab</a>
+                        </p> -->
+                        <p>
+                            
+                            Participants can submit at <a href="https://www.codabench.org/competitions/4897/">Codabench</a>.
+                        </p>
+                        <p>
+                            
+                            We will review the submissions publish the ranking here. 
+                            Feel free to contact us at <a href="mailto: fir430179@gmail.com">fir430179@gmail.com</a>.
+                            
+                        
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="baseline" class="column is-four-fifths">
+                    <h2 class="title is-3">Baseline</h2>
+                    <div class="content has-text-justified">
+                      
+                        <p>
+                            Link to the code <a href="https://github.com/SpeechEE/SpeechEE">SpeechEE code</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        
+             <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Registration</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                             Welcome and please apply for the VSD challenge via a form at <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuKXhaN5qa61rWlwaE3VpJD5FHcVLH25Un95wch6fCKiXIGQ/viewform?usp=sf_link">this link</a>.
+                        </p>
+                        <p>
+                            Feel free to contact us at <a href="mailto: vsdchallenge@gmail.com">vsdchallenge@gmail.com</a>.
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+
+            
+            
+            
+             <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Rewards</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Top-ranked participants in this competition will receive a certificate of achievement and will be recommended to write a technical paper for submission to the <a>ACM ToMM Special Issue</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>   -->
+
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Organizers</h2>
+                    <div class="content has-text-justified">
+                        
+            <p>Bin Wang (Harbin Institute of Technology, Shenzhen, China)</p>
+            <p>Hao Fei (National University of Singapore, Singapore)</p>
+            <p>Meishan Zhang (Harbin Institute of Technology, Shenzhen, China)</p>
+            <p>Min Zhang (Harbin Institute of Technology, Shenzhen, China)</p>
+            <p>Yu Zhao (Tianjin University, China)</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">References</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            
+                            [1] Wang, B., Zhang, M., Fei, H., Zhao, Y., Li, B., Wu, S., ... & Zhang, M. (2024, October). SpeechEE: A Novel Benchmark for Speech Event Extraction. In Proceedings of the 32nd ACM International Conference on Multimedia (pp. 10449-10458).
+                        </p>
+
+                        <p>
+                            
+                            [2] Ying Lin, Heng Ji, Fei Huang, and Lingfei Wu. 2020. A Joint Neural Model for Information Extraction with Global Features. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 7999–8009, Online. Association for Computational Linguistics.
+                        </p>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+<script>
+    // function jsonShowFn(json){
+    //     if (!json.match("^\{(.+:.+,*){1,}\}$")) {
+    //         return json           //判断是否是json数据，不是直接返回
+    //     }
+
+    //     if (typeof json != 'string') {
+    //         json = JSON.stringify(json, undefined, 2);
+    //     }
+    //     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    //     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+    //         var cls = 'number';
+    //         if (/^"/.test(match)) {
+    //             if (/:$/.test(match)) {
+    //                 cls = 'key';
+    //             } else {
+    //                 cls = 'string';
+    //             }
+    //         } else if (/true|false/.test(match)) {
+    //             cls = 'boolean';
+    //         } else if (/null/.test(match)) {
+    //             cls = 'null';
+    //         }
+    //         return '<span class="' + cls + '">' + match + '</span>';
+    //     });
+    // }
+    // $('#jsonShow').html(jsonShowFn('[{"imd_id":1,"triple_list":["s":"book","o":"table"]}]'));
+</script>
+</html>
